@@ -1,0 +1,48 @@
+# =============================================================================
+# INAVIT · túneles SSH desde la laptop (agrega esto a ~/.ssh/config)
+# Uso:   ssh -fN inavit-vm1   (en segundo plano)   ·   pkill -f "ssh -fN inavit-"
+# Cambia HostName, User e IdentityFile. Pon la llave con chmod 600.
+# =============================================================================
+
+Host inavit-vm1
+    HostName <ip-o-host-vm1>
+    User itzuser
+    IdentityFile ~/.ssh/<llave-vm1>.pem
+    LocalForward 39041 localhost:39041   # SAP HANA (tenant HXE)
+    LocalForward 50000 localhost:50000   # Db2 INAVITDB
+    ServerAliveInterval 30
+    ExitOnForwardFailure yes
+
+Host inavit-vm2
+    HostName <ip-o-host-vm2>
+    User itzuser
+    IdentityFile ~/.ssh/<llave-vm2>.pem
+    ServerAliveInterval 30
+
+Host inavit-vm3
+    HostName <ip-o-host-vm3>
+    User <usuario-windows>
+    IdentityFile ~/.ssh/<llave-vm3>.pem
+    LocalForward 1433 localhost:1433     # SQL Server INAVIT_STG
+    LocalForward 5432 localhost:5432     # PostgreSQL inavit_stg
+    ServerAliveInterval 30
+    ExitOnForwardFailure yes
+
+Host inavit-vm4
+    HostName <ip-o-host-vm4>
+    User itzuser
+    IdentityFile ~/.ssh/<llave-vm4>.pem
+    LocalForward 6443 localhost:6443     # consola watsonx.data  -> https://localhost:6443/
+    LocalForward 9001 localhost:9001     # consola MinIO         -> http://localhost:9001/
+    LocalForward 9000 localhost:9000     # API S3 de MinIO
+    LocalForward 8443 localhost:8443     # Presto
+    ServerAliveInterval 30
+    ExitOnForwardFailure yes
+
+Host inavit-vm5
+    HostName <ip-o-host-vm5>
+    User itzuser
+    IdentityFile ~/.ssh/<llave-vm5>.pem
+    LocalForward 9300 localhost:9300     # Cognos -> http://localhost:9300/bi/
+    ServerAliveInterval 30
+    ExitOnForwardFailure yes

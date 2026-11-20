@@ -1,0 +1,27 @@
+# Secretos
+.env
+*.env
+!*.env.example
+*.pem
+*.key
+id_rsa*
+ngrok.yml
+
+# Artefactos binarios y datos
+*.zip
+*.csv
+*.parquet
+data/
+cognos/export/*
+!cognos/export/.gitkeep
+datastage/export/*
+!datastage/export/.gitkeep
+!datastage/export/README.md
+
+# Sistema
+.DS_Store
+**/.DS_Store
+.bob/
+__pycache__/
+*.pyc
+*.log
